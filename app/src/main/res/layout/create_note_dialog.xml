@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog">
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_header_dialog"
+        android:padding="@dimen/base_m_p_m"
+        android:text="@string/create_note"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="@dimen/base_text_header_dialog_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/clContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/base_m_p_xl"
+        android:paddingBottom="@dimen/base_m_p_xl"
+        app:layout_constraintBottom_toTopOf="@+id/lnBottomAction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader">
+
+        <LinearLayout
+            android:id="@+id/lnUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="DisableBaselineAlignment">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/username_label"
+                android:textColor="@color/gray_900"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/gray_900"
+                tools:text="Trần Tuấn Vũ" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lnUsername"
+            tools:ignore="DisableBaselineAlignment">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/address_label"
+                android:textColor="@color/gray_900"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/gray_900"
+                tools:text="92 Yên Thế, P. Yên Thế, Q. Cầu Giấy, Hà Nội" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lnAddress">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/note_label"
+                android:textColor="@color/gray_900"
+                android:layout_marginBottom="@dimen/base_m_p_s"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_input"
+                android:gravity="top"
+                android:hint="@string/note_hint"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:lines="10"
+                android:minLines="5"
+                android:padding="@dimen/base_m_p_m"
+                android:textColor="@color/gray_900"
+                android:textColorHint="@color/gray_400"
+                android:textSize="@dimen/base_text_size" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/lnBottomAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_left_btn_dialog"
+            android:backgroundTint="@color/gray_100"
+            android:text="@string/cancel"
+            android:textColor="@color/red_500"
+            android:textSize="@dimen/base_text_size"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_right_btn_dialog"
+            android:backgroundTint="@color/orange_700"
+            android:text="@string/save_note"
+            android:textColor="@color/white"
+            android:textSize="@dimen/base_text_size"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

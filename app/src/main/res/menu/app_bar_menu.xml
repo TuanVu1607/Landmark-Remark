@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_add_note"
+        android:icon="@drawable/ic_add"
+        android:title="@string/create_note"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/action_note_history"
+        android:icon="@drawable/ic_history"
+        android:title="@string/address_note_history"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/logout"
+        app:showAsAction="ifRoom" />
+</menu>

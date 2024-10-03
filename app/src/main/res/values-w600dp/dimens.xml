@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="fab_margin">48dp</dimen>
+    <dimen name="base_m_p_s">16dp</dimen>
+    <dimen name="base_m_p_m">24dp</dimen>
+    <dimen name="base_m_p_l">32dp</dimen>
+    <dimen name="base_m_p_xl">40dp</dimen>
+
+    <dimen name="base_text_size">16sp</dimen>
+    <dimen name="base_text_header_size">22sp</dimen>
+    <dimen name="base_text_header_dialog_size">18sp</dimen>
+</resources>

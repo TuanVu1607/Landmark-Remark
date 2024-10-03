@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mapFragment">
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.technology.landmarkremark.ui.fragment.map.MapFragment"
+        android:label="Bản đồ"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_addressNoteFragment"
+            app:destination="@id/addressNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressNoteFragment"
+        android:name="com.technology.landmarkremark.ui.fragment.address_note.AddressNoteFragment"
+        android:label="Lịch sử các địa chỉ đã lưu"
+        tools:layout="@layout/fragment_address_note" />
+</navigation>

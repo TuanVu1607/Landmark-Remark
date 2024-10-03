@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.LandmarkRemark" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- màu nền cửa sổ -->
+        <item name="android:windowBackground">@color/common_window_background_color</item>
+        <!-- Màu chính của ứng dụng, được Thanh công cụ ActionBar sử dụng theo mặc định -->
+        <item name="colorPrimary">@color/common_primary_color</item>
+        <!-- Màu tối chính của ứng dụng, được sử dụng theo mặc định cho thanh trạng thái -->
+        <item name="colorPrimaryDark">@color/common_primary_color</item>
+        <!-- Màu nhấn của ứng dụng, màu này được sử dụng theo mặc định cho hiệu ứng lựa chọn của các điều khiển chung, chẳng hạn như CheckBox RadioButton Switch -->
+        <item name="colorAccent">@color/common_accent_color</item>
+        <!-- Màu phụ của ứng dụng -->
+        <item name="colorSecondary">@color/common_accent_color</item>
+        <!-- Màu văn bản mặc định, Nút, Màu văn bản TextView -->
+        <item name="android:textColor">@color/common_text_color</item>
+        <!-- Màu lời nhắc mặc định, màu văn bản lời nhắc của Nút và Chế độ xem văn bản -->
+        <item name="android:textColorHint">@color/common_text_hint_color</item>
+        <!-- Màu của status bar -->
+        <item name="android:statusBarColor">@color/white</item>
+        <!-- Đặt văn bản và biểu tượng thành màu đen nếu là nền sáng -->
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Đặt màu cho AppBar-->
+        <item name="appBarLayoutStyle">@color/common_primary_color</item>
+    </style>
+</resources>

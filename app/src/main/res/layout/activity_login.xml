@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="LoginViewModel"
+            type="com.technology.landmarkremark.viewmodel.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_m_p_xl"
+            android:text="@string/welcome"
+            android:textAlignment="center"
+            android:textSize="@dimen/base_text_header_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/lnUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/base_m_p_xl"
+            android:background="@drawable/bg_border_input"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/base_m_p_s"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvWelcome">
+
+            <EditText
+                android:id="@+id/edtUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:afterTextChanged="@{() -> LoginViewModel.eventChangeTextUsername()}"
+                android:background="@color/white"
+                android:hint="@string/username"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:padding="@dimen/base_m_p_s"
+                android:text="@={LoginViewModel.username}"
+                android:textColor="@color/gray_900"
+                android:textColorHint="@color/gray_400"
+                android:textSize="@dimen/base_text_size" />
+
+            <ImageButton
+                android:id="@+id/ibClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_clear_input"
+                android:onClick="@{()-> LoginViewModel.clearUsername()}"
+                android:visibility="@{LoginViewModel.isShowClear ? View.VISIBLE : View.GONE}"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvErrorUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/base_m_p_xl"
+            android:layout_marginTop="@dimen/base_m_p_s"
+            android:padding="2dp"
+            android:text="@{LoginViewModel.usernameError}"
+            android:textColor="@color/red_600"
+            android:textSize="@dimen/base_text_size"
+            android:visibility="@{LoginViewModel.isShowErrorUsername ? View.VISIBLE: View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lnUsername" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/base_m_p_xl"
+            android:layout_marginTop="@dimen/base_m_p_m"
+            android:background="@drawable/bg_button_login"
+            android:enabled="@{LoginViewModel.isEnableLoginButton}"
+            android:onClick="@{()-> LoginViewModel.onLogin()}"
+            android:text="@string/login"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/base_text_header_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvErrorUsername" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

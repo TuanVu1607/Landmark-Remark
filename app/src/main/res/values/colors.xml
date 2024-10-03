@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="shimmer">#dddddd</color>
+    <color name="common_window_background_color">@color/white</color>
+    <color name="common_window_background_color_dark">@color/black</color>
+    <color name="common_primary_color">@color/white</color>
+    <color name="common_primary_color_dark">@color/black</color>
+    <color name="common_accent_color">@color/orange_900</color>
+    <color name="common_text_color">@color/gray_900</color>
+    <color name="common_text_color_dark">@color/white</color>
+    <color name="common_text_hint_color">@color/gray_500</color>
+
+    <!--Dãy màu orange-->
+    <color name="orange_600_8">#14FFB700</color>
+    <color name="orange_600_16">#29FFB700</color>
+    <color name="orange_600_24">#3DFFB700</color>
+    <color name="orange_600_32">#52FFB700</color>
+    <color name="orange_600_40">#66FFB700</color>
+    <color name="orange_600_48">#7AFFB700</color>
+    <color name="orange_100">#FEEDB4</color>
+    <color name="orange_200">#FEE283</color>
+    <color name="orange_300">#FED850</color>
+    <color name="orange_400">#FFCD29</color>
+    <color name="orange_500">#FFC509</color>
+    <color name="orange_600">#FFB700</color>
+    <color name="orange_700">#FFA400</color>
+    <color name="orange_800">#FF9300</color>
+    <color name="orange_900">#FF7300</color>
+
+    <!--Dãy màu gray-->
+    <color name="gray_900_8">#1428282B</color>
+    <color name="gray_900_16">#2928282B</color>
+    <color name="gray_900_24">#3D28282B</color>
+    <color name="gray_900_32">#5228282B</color>
+    <color name="gray_900_40">#6628282B</color>
+    <color name="gray_900_48">#7A28282B</color>
+    <color name="gray_100">#F5F6FA</color>
+    <color name="gray_200">#F1F2F5</color>
+    <color name="gray_300">#E7E8EB</color>
+    <color name="gray_400">#C5C6C9</color>
+    <color name="gray_500">#A7A8AB</color>
+    <color name="gray_600">#7D7E81</color>
+    <color name="gray_700">#696A6C</color>
+    <color name="gray_800">#494A4D</color>
+    <color name="gray_900">#28282B</color>
+
+    <!--Dãy màu blue-->
+    <color name="blue_8">#141E90FF</color>
+    <color name="blue_16">#291E90FF</color>
+    <color name="blue_24">#3D1E90FF</color>
+    <color name="blue_32">#521E90FF</color>
+    <color name="blue_40">#661E90FF</color>
+    <color name="blue_48">#7A1E90FF</color>
+    <color name="blue_100">#BCDEFE</color>
+    <color name="blue_200">#91C9FE</color>
+    <color name="blue_300">#66B4FD</color>
+    <color name="blue_400">#46A4FD</color>
+    <color name="blue_500">#2D94FB</color>
+    <color name="blue_600">#2D86EC</color>
+    <color name="blue_700">#2A74D9</color>
+    <color name="blue_800">#2862C6</color>
+    <color name="blue_900">#2343A7</color>
+
+    <!--Dãy màu green-->
+    <color name="green_700_8">#14009328</color>
+    <color name="green_700_16">#29009328</color>
+    <color name="green_700_24">#3D009328</color>
+    <color name="green_700_32">#52009328</color>
+    <color name="green_700_40">#66009328</color>
+    <color name="green_700_48">#7A009328</color>
+    <color name="green_100">#BFE8C6</color>
+    <color name="green_200">#95D9A1</color>
+    <color name="green_300">#65CB7A</color>
+    <color name="green_400">#38C05D</color>
+    <color name="green_500">#00B43D</color>
+    <color name="green_600">#00A534</color>
+    <color name="green_700">#009328</color>
+    <color name="green_800">#00821B</color>
+    <color name="green_900">#006205</color>
+
+    <!--Dãy màu red-->
+    <color name="red_700_8">#14D70028</color>
+    <color name="red_700_16">#29D70028</color>
+    <color name="red_700_24">#3DD70028</color>
+    <color name="red_700_32">#52D70028</color>
+    <color name="red_700_40">#66D70028</color>
+    <color name="red_700_48">#7AD70028</color>
+    <color name="red_100">#FFC5D0</color>
+    <color name="red_200">#F18C96</color>
+    <color name="red_300">#E75C6D</color>
+    <color name="red_400">#F2244A</color>
+    <color name="red_500">#F7002E</color>
+    <color name="red_600">#E8002E</color>
+    <color name="red_700">#D70028</color>
+    <color name="red_800">#CA0020</color>
+    <color name="red_900">#BB0014</color>
+</resources>

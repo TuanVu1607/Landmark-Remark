@@ -14,7 +14,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -84,7 +83,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             override fun onQueryTextChange(newText: String?): Boolean {
                 binding.searchList.isVisible = !viewModel.searchKey.value.isNullOrEmpty()
                 newText?.let { viewModel.setTextSearch(it) }
-                Log.i(TAG, "onQueryTextChange: $newText")
                 return false
             }
         })
@@ -214,6 +212,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
+                Log.d("enableMyLocation: ", "true")
                 function()
                 return
             }
@@ -243,9 +242,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             }
             task.addOnFailureListener { error ->
                 Log.e(TAG, "getMyLocationError: ${error.message}")
-                error.message?.let {
-                    context?.toast(it)
-                }
+                error.message?.let { context?.toast(it) }
             }
         }
     }
@@ -267,7 +264,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         )
     }
 
-    private fun jumpToLocation(lat: Double, lng: Double){
+    private fun jumpToLocation(lat: Double, lng: Double) {
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 15f))
     }
 

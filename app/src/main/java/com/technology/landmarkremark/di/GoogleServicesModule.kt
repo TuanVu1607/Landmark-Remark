@@ -1,8 +1,8 @@
 package com.technology.landmarkremark.di
 
 import android.content.Context
-import com.technology.landmarkremark.preferences.PreferenceManager
-import com.technology.landmarkremark.preferences.Preferences
+import com.technology.landmarkremark.google_services.GoogleServicesApi
+import com.technology.landmarkremark.google_services.GoogleServicesManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,9 +12,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object PreferencesModule {
+object GoogleServicesModule {
     @Provides
     @Singleton
-    fun providePreferences(@ApplicationContext context: Context): Preferences =
-        PreferenceManager(context)
+    fun provideGoogleServices(@ApplicationContext context: Context): GoogleServicesApi =
+        GoogleServicesManager(context)
 }

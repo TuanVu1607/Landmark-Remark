@@ -7,13 +7,13 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import javax.inject.Inject
 
-class GoogleServicesManager @Inject constructor(var context: Context) : GoogleServices(context),
-    GoogleServiceApi {
+class GoogleServicesManager @Inject constructor(context: Context) : GoogleServices(context),
+    GoogleServicesApi {
     override suspend fun getReverseGeocoding(
         lat: Double,
         lng: Double,
         maxResult: Int
-    ): MutableList<Address>? = Geocoder(context).getFromLocation(lat, lng, maxResult)
+    ): MutableList<Address>? = geocoder.getFromLocation(lat, lng, maxResult)
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override suspend fun getReverseGeocodingNewVersion(
@@ -21,6 +21,6 @@ class GoogleServicesManager @Inject constructor(var context: Context) : GoogleSe
         lng: Double,
         maxResult: Int,
         geoListener: Geocoder.GeocodeListener
-    ) = Geocoder(context).getFromLocation(lat, lng, maxResult, geoListener)
+    ) = geocoder.getFromLocation(lat, lng, maxResult, geoListener)
 
 }

@@ -1,10 +1,9 @@
 package com.technology.landmarkremark.google_services
 
-import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 
-interface GoogleServiceApi {
+interface GoogleServicesApi {
     suspend fun getReverseGeocoding(
         lat: Double,
         lng: Double,

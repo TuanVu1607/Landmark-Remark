@@ -4,16 +4,16 @@ import com.technology.landmarkremark.data.dao.AddressNoteDao
 import com.technology.landmarkremark.data.entity.AddressNoteEntity
 import com.technology.landmarkremark.data.model.UserAddressNote
 import com.technology.landmarkremark.domain.repository.MainRepository
-import com.technology.landmarkremark.preferences.PreferenceManager
+import com.technology.landmarkremark.preferences.Preferences
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class MainRepositoryImp @Inject constructor(
-    private val preferenceManager: PreferenceManager,
+    private val preferences: Preferences,
     private val addressNoteDao: AddressNoteDao,
 ) : MainRepository {
-    override suspend fun getUserData() = preferenceManager.getUserData()
+    override suspend fun getUserData() = preferences.getUserData()
 
     override suspend fun createNote(userAddressNote: UserAddressNote): Long {
         return addressNoteDao.insert(
@@ -27,5 +27,5 @@ class MainRepositoryImp @Inject constructor(
         )
     }
 
-    override suspend fun deleteUserData(userId: Int) = preferenceManager.deleteUserData()
+    override suspend fun deleteUserData(userId: Int) = preferences.deleteUserData()
 }

@@ -10,7 +10,6 @@ import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.util.Log
 import androidx.core.content.res.ResourcesCompat
-import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,7 +22,6 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.technology.landmarkremark.R
 import com.technology.landmarkremark.data.entity.UserEntity
-import com.technology.landmarkremark.data.model.AddressLocation
 import com.technology.landmarkremark.data.model.Resource
 import com.technology.landmarkremark.data.model.UserAddressNote
 import com.technology.landmarkremark.domain.repository.MapRepository

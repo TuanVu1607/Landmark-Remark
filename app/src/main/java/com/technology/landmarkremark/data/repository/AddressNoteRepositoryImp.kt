@@ -15,4 +15,7 @@ class AddressNoteRepositoryImp @Inject constructor(private val addressNoteDao: A
 
     override suspend fun deleteAddressNote(addressNote: AddressNoteEntity) =
         addressNoteDao.delete(addressNote)
+
+    override fun searchAddressNote(searchQuery: String): LiveData<List<AddressNoteEntity>> =
+        addressNoteDao.searchAddressNote(searchQuery)
 }

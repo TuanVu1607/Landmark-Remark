@@ -1,96 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:padding="@dimen/base_m_p_s">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/lnUsername"
-        android:layout_width="0dp"
+    <data>
+
+        <variable
+            name="userAddressNote"
+            type="com.technology.landmarkremark.data.model.UserAddressNote" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="DisableBaselineAlignment">
+        android:background="@color/white"
+        android:padding="@dimen/base_m_p_s">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/lnUsername"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/username_label"
-            android:textColor="@color/gray_900"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="DisableBaselineAlignment">
 
-        <TextView
-            android:id="@+id/tvUsername"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/username_label"
+                android:textColor="@color/gray_900"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@{userAddressNote.userName}"
+                android:textColor="@color/gray_900"
+                tools:text="Trần Tuấn Vũ" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:textColor="@color/gray_900"
-            tools:text="Trần Tuấn Vũ" />
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lnUsername"
+            tools:ignore="DisableBaselineAlignment">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/address_label"
+                android:textColor="@color/gray_900"
+                android:textStyle="bold" />
 
-    <LinearLayout
-        android:id="@+id/lnAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lnUsername"
-        tools:ignore="DisableBaselineAlignment">
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@{userAddressNote.address}"
+                android:textColor="@color/gray_900"
+                tools:text="92 Yên Thế, P. Yên Thế, Q. Cầu Giấy, Hà Nội" />
 
-        <TextView
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnNote"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/address_label"
-            android:textColor="@color/gray_900"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lnAddress"
+            tools:ignore="DisableBaselineAlignment">
 
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:textColor="@color/gray_900"
-            tools:text="92 Yên Thế, P. Yên Thế, Q. Cầu Giấy, Hà Nội" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/note_label"
+                android:textColor="@color/gray_900"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvNote"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@{userAddressNote.addressNoteContent}"
+                android:textColor="@color/gray_900"
+                tools:text="Ghi chú nè" />
 
-    <LinearLayout
-        android:id="@+id/lnNote"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lnAddress"
-        tools:ignore="DisableBaselineAlignment">
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/note_label"
-            android:textColor="@color/gray_900"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvNote"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:textColor="@color/gray_900"
-            tools:text="Ghi chú nè" />
-
-    </LinearLayout>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

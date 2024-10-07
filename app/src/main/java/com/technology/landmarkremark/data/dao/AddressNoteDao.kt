@@ -26,6 +26,6 @@ interface AddressNoteDao {
     @Query("SELECT * FROM address_note_table WHERE userId = :userId")
     fun getUserAddressNoteHistory(userId: Int): LiveData<List<AddressNoteEntity>>
 
-    @Query("SELECT * FROM address_note_table WHERE address LIKE '%' || :searchQuery || '%' OR content LIKE '%' || :searchQuery || '%'")
+    @Query("SELECT * FROM address_note_table WHERE :searchQuery = '' OR address LIKE '%' || :searchQuery || '%' OR content LIKE '%' || :searchQuery || '%'")
     fun searchAddressNote(searchQuery: String): LiveData<List<AddressNoteEntity>>
 }

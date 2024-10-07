@@ -7,4 +7,6 @@ interface AddressNoteRepository {
     fun getUserAddressHistory(userId: Int): LiveData<List<AddressNoteEntity>>
 
     suspend fun deleteAddressNote(addressNote: AddressNoteEntity): Int
+
+    fun searchAddressNote(searchQuery: String): LiveData<List<AddressNoteEntity>>
 }

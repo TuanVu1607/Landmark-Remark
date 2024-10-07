@@ -48,11 +48,6 @@ class MapViewModel @Inject constructor(private val mapRepository: MapRepository)
         Log.i(TAG, "initViewModel()")
     }
 
-    private fun handleUserAddressNoteResponse(response: List<UserAddressNote>?): Resource<List<UserAddressNote>> {
-        if (response == null) return Resource.Error("Không tìm thấy dữ liệu")
-        return Resource.Success(response)
-    }
-
     fun reverseGeocodeMyLocation(location: Location) = viewModelScope.launch(Dispatchers.IO) {
         try {
             if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

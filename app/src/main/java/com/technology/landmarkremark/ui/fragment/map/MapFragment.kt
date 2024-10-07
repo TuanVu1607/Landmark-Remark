@@ -119,6 +119,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         }
                     }
                 }
+            } else {
+                userAddressNoteAdapter?.differ?.submitList(listOf())
             }
         }
     }

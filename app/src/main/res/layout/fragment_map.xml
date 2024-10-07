@@ -30,7 +30,8 @@
             android:layout_alignParentTop="true"
             android:layout_margin="@dimen/base_m_p_s"
             android:background="@drawable/bg_border_input"
-            android:queryHint="@string/search_hint" />
+            app:queryBackground="@null"
+            app:queryHint="@string/search_hint" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchList"
@@ -39,7 +40,8 @@
             android:layout_below="@+id/searchView"
             android:layout_alignStart="@+id/searchView"
             android:layout_alignEnd="@+id/searchView"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:listitem="@layout/item_user_address_note" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabMyLocation"

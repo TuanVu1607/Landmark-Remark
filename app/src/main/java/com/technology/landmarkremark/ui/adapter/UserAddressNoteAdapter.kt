@@ -2,9 +2,12 @@ package com.technology.landmarkremark.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.technology.landmarkremark.BR
+import com.technology.landmarkremark.R
 import com.technology.landmarkremark.data.model.UserAddressNote
 import com.technology.landmarkremark.databinding.ItemUserAddressNoteBinding
 import com.technology.landmarkremark.interfaces.ItemClickListener
@@ -28,8 +31,12 @@ class UserAddressNoteAdapter(var itemClickListener: ItemClickListener) :
     override fun getItemCount(): Int = differ.currentList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            ItemUserAddressNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: ItemUserAddressNoteBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_user_address_note,
+            parent,
+            false
+        )
         return ViewHolder(binding)
     }
 
@@ -41,9 +48,8 @@ class UserAddressNoteAdapter(var itemClickListener: ItemClickListener) :
     inner class ViewHolder(private val binding: ItemUserAddressNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBindView(data: UserAddressNote) {
-            binding.tvUsername.text = data.userName
-            binding.tvAddress.text = data.address
-            binding.tvNote.text = data.addressNoteContent
+            binding.setVariable(BR.userAddressNote, data)
+            binding.executePendingBindings()
 
             itemView.setOnClickListener {
                 itemClickListener.onClick(data)

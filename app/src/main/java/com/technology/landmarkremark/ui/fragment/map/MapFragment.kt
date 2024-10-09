@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,12 +16,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.technology.landmarkremark.R
 import com.technology.landmarkremark.common.extensions.setOnSingleClickListener
 import com.technology.landmarkremark.common.extensions.toast
@@ -47,6 +50,49 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     private val mainViewModel: MainViewModel by activityViewModels()
     private var userAddressNoteAdapter: UserAddressNoteAdapter? = null
 
+    @SuppressLint("MissingPermission")
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                // Precise location access granted.
+                getMyLocation()
+            }
+
+            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                // Only approximate location access granted.
+                getMyLocation()
+            }
+
+            else -> {
+                // No location access granted.
+                context?.toast(getString(R.string.please_allow_permission_location))
+            }
+        }
+    }
+    private val locationRequestBuilder =
+        LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000).setMaxUpdates(1)
+    private val locationRequest = locationRequestBuilder.build()
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            super.onLocationResult(locationResult)
+            if (locationResult.lastLocation != null) {
+                mainViewModel.currentLocation = AddressLocation(
+                    locationResult.lastLocation!!.latitude,
+                    locationResult.lastLocation!!.longitude,
+                    ""
+                )
+                viewModel.reverseGeocodeMyLocation(locationResult.lastLocation!!)
+                viewModel.jumpToMyLocation(
+                    map,
+                    locationResult.lastLocation!!.latitude,
+                    locationResult.lastLocation!!.longitude
+                )
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.i(TAG, "onViewCreated()")
@@ -57,6 +103,11 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         eventHandle()
         observeMyLocationData()
         observeUserAddressNoteData()
+    }
+
+    override fun onStop() {
+        fusedLocationClient?.removeLocationUpdates(locationCallback)
+        super.onStop()
     }
 
     private fun initAdapter() {
@@ -89,9 +140,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         binding.searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
             binding.searchList.isVisible = hasFocus && !viewModel.searchKey.value.isNullOrEmpty()
         }
-        binding.fabMyLocation.setOnSingleClickListener {
-            enableMyLocation { getMyLocation() }
-        }
+        binding.fabMyLocation.setOnSingleClickListener { enableMyLocation { getMyLocation() } }
     }
 
     private fun observeUserAddressNoteData() {
@@ -134,10 +183,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
                 is Resource.Error -> {
                     result.message?.let { errorMess ->
-                        {
-                            Log.e(GOOGLE_SERVICE_API_ERROR, errorMess)
-                            context?.toast(errorMess)
-                        }
+                        Log.e(GOOGLE_SERVICE_API_ERROR, errorMess)
+                        context?.toast(errorMess)
                     }
                 }
 
@@ -145,8 +192,10 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     result.data?.let { address ->
                         mainViewModel.currentLocation?.let { location ->
                             location.address = address.getAddressLine(0)
-                            jumpToMyLocation(
-                                location.lat, location.lng,
+                            viewModel.jumpToMyLocation(
+                                map,
+                                location.lat,
+                                location.lng,
                                 address.getAddressLine(0),
                                 false
                             )
@@ -162,28 +211,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         val supportFragment =
             childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         supportFragment.getMapAsync(this)
-    }
-
-    @SuppressLint("MissingPermission")
-    private val locationPermissionRequest = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        when {
-            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                // Precise location access granted.
-                getMyLocation()
-            }
-
-            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                // Only approximate location access granted.
-                getMyLocation()
-            }
-
-            else -> {
-                // No location access granted.
-                context?.toast("Please allow location permission")
-            }
-        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -214,7 +241,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
-                Log.d("enableMyLocation: ", "true")
                 function()
                 return
             }
@@ -233,45 +259,16 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     @SuppressLint("MissingPermission")
     private fun getMyLocation() {
         fusedLocationClient?.apply {
-            val task = this.lastLocation
-            task.addOnSuccessListener { location ->
-                if (location != null) {
-                    mainViewModel.currentLocation =
-                        AddressLocation(location.latitude, location.longitude, "")
-                    viewModel.reverseGeocodeMyLocation(location)
-                    jumpToMyLocation(location.latitude, location.longitude)
+            this.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+                .addOnFailureListener { e ->
+                    Log.e(TAG, "getMyLocationError: ${e.message}")
+                    context?.toast(getString(R.string.get_location_fail))
                 }
-            }
-            task.addOnFailureListener { error ->
-                Log.e(TAG, "getMyLocationError: ${error.message}")
-                error.message?.let { context?.toast(it) }
-            }
         }
-    }
-
-    private fun jumpToMyLocation(
-        lat: Double,
-        lng: Double,
-        addressText: String = "",
-        isJump: Boolean = true
-    ) {
-        if (viewModel.myCurrentMarker != null) viewModel.myCurrentMarker?.remove()
-        val latLng = LatLng(lat, lng)
-        if (isJump) map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        viewModel.handleSetMyMarkerLocation(
-            map,
-            lat,
-            lng,
-            addressText
-        )
-    }
-
-    private fun jumpToLocation(lat: Double, lng: Double) {
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 15f))
     }
 
     override fun onClick(objects: Any?) {
         val data = objects as UserAddressNote
-        jumpToLocation(data.lat, data.lng)
+        viewModel.jumpToLocation(map, data.lat, data.lng)
     }
 }

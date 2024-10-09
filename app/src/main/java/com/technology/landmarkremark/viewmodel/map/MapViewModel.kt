@@ -15,6 +15,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -36,9 +37,9 @@ class MapViewModel @Inject constructor(private val mapRepository: MapRepository)
     private val TAG = MapViewModel::class.java.simpleName
 
     val myLocationData = MutableLiveData<Resource<Address>>()
-    var myCurrentMarker: Marker? = null
+    private var myCurrentMarker: Marker? = null
     val searchKey: MutableLiveData<String> = MutableLiveData("")
-    val usersAddressNoteData: LiveData<List<UserAddressNote>> = searchKey.switchMap {text->
+    val usersAddressNoteData: LiveData<List<UserAddressNote>> = searchKey.switchMap { text ->
         mapRepository.searchAddressNote(text)
     }
 
@@ -96,6 +97,23 @@ class MapViewModel @Inject constructor(private val mapRepository: MapRepository)
         return bitmap
     }
 
+    fun jumpToLocation(map: GoogleMap?, lat: Double, lng: Double) {
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 15f))
+    }
+
+    fun jumpToMyLocation(
+        map: GoogleMap?,
+        lat: Double,
+        lng: Double,
+        addressText: String = "",
+        isJump: Boolean = true
+    ) {
+        if (myCurrentMarker != null) myCurrentMarker?.remove()
+        val latLng = LatLng(lat, lng)
+        if (isJump) map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        this.handleSetMyMarkerLocation(map, lat, lng, addressText)
+    }
+
     fun handleSetMyMarkerLocation(
         map: GoogleMap?,
         lat: Double,
@@ -146,5 +164,5 @@ class MapViewModel @Inject constructor(private val mapRepository: MapRepository)
         map?.addMarker(marker)
     }
 
-    fun setTextSearch(text:String) = searchKey.postValue(text)
+    fun setTextSearch(text: String) = searchKey.postValue(text)
 }

@@ -12,7 +12,7 @@ import com.technology.landmarkremark.data.model.UserAddressNote
 import com.technology.landmarkremark.databinding.CreateNoteDialogBinding
 import com.technology.landmarkremark.interfaces.CreateNoteDialogListener
 
-class CreateNoteDialog(var activity: Activity) {
+class ActionDetailNoteDialog(var activity: Activity) {
     private val builder = AlertDialog.Builder(activity)
     private var alertDialog: AlertDialog? = null
     private var listener: CreateNoteDialogListener? = null

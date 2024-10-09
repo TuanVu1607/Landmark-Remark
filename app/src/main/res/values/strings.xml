@@ -17,5 +17,7 @@
     <string name="note_label">Ghi chú: </string>
     <string name="note_hint">Vui lòng nhập ghi chú</string>
     <string name="logout">Đăng xuất</string>
-    <string name="search_hint">Tìm kiếm...</string>
+    <string name="search_hint">Tìm kiếm…</string>
+    <string name="get_location_fail">Lấy vị trí thất bại</string>
+    <string name="please_allow_permission_location">Hãy cho phép truy cập vị trí</string>
 </resources>

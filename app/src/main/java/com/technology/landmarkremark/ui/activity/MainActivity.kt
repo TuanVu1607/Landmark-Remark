@@ -16,7 +16,7 @@ import com.technology.landmarkremark.data.model.UserAddressNote
 import com.technology.landmarkremark.databinding.ActivityMainBinding
 import com.technology.landmarkremark.interfaces.CreateNoteDialogListener
 import com.technology.landmarkremark.ui.base.BaseActivity
-import com.technology.landmarkremark.ui.dialog.CreateNoteDialog
+import com.technology.landmarkremark.ui.dialog.ActionDetailNoteDialog
 import com.technology.landmarkremark.ui.dialog.ProgressDialog
 import com.technology.landmarkremark.viewmodel.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,13 +28,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val navController by lazy { findNavController(R.id.nav_host_fragment_content_main) }
     private val mainViewModel by viewModels<MainViewModel>()
-    private var createNoteDialog: CreateNoteDialog? = null
+    private var actionDetailNoteDialog: ActionDetailNoteDialog? = null
+    private var loadingDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate()")
         setupAppBarAndNavigation()
-        createNoteDialog = CreateNoteDialog(this)
+        actionDetailNoteDialog = ActionDetailNoteDialog(this)
+        loadingDialog = ProgressDialog(this)
         mainViewModel.getUser()
         observeCreateNoteData()
     }
@@ -42,17 +44,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private fun observeCreateNoteData() {
         mainViewModel.createNoteData.observe(this) { result ->
             when (result) {
-                is Resource.Loading -> ProgressDialog(this).createProgressDialog()
+                is Resource.Loading -> loadingDialog?.createProgressDialog()
 
                 is Resource.Error -> {
-                    ProgressDialog(this).cancelDialog()
-                    result.message?.let { errorMess ->
-                        toast(errorMess)
-                    }
+                    loadingDialog?.cancelDialog()
+                    result.message?.let { errorMess -> toast(errorMess) }
                 }
 
                 is Resource.Success -> {
-                    ProgressDialog(this).cancelDialog()
+                    loadingDialog?.cancelDialog()
                     toast("Tạo note thành công")
                 }
             }
@@ -76,7 +76,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     "${mainViewModel.currentLocation} - ${mainViewModel.userData}"
                 )
                 if (mainViewModel.currentLocation != null && mainViewModel.userData != null)
-                    createNoteDialog?.createDialog(
+                    actionDetailNoteDialog?.createDialog(
                         this, UserAddressNote(
                             mainViewModel.userData!!.id,
                             mainViewModel.userData!!.name,

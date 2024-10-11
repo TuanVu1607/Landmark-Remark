@@ -45,15 +45,15 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabMyLocation"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/base_m_p_3xl"
+            android:layout_height="@dimen/base_m_p_3xl"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/base_m_p_xl"
+            android:layout_marginBottom="@dimen/base_m_p_4xl"
             android:backgroundTint="@color/white"
             android:src="@drawable/ic_location"
-            app:fabCustomSize="40dp"
+            app:fabCustomSize="@dimen/base_m_p_3xl"
             app:tint="@color/red_500"
             tools:ignore="ContentDescription" />
 

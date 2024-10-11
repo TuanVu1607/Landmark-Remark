@@ -1,9 +1,12 @@
 <resources>
-    <dimen name="fab_margin">200dp</dimen>
+    <dimen name="fab_margin">56dp</dimen>
     <dimen name="base_m_p_s">24dp</dimen>
     <dimen name="base_m_p_m">326dp</dimen>
     <dimen name="base_m_p_l">40dp</dimen>
     <dimen name="base_m_p_xl">48dp</dimen>
+    <dimen name="base_m_p_2xl">56dp</dimen>
+    <dimen name="base_m_p_3xl">64dp</dimen>
+    <dimen name="base_m_p_4xl">72dp</dimen>
 
     <dimen name="base_text_size">18sp</dimen>
     <dimen name="base_text_header_size">24sp</dimen>

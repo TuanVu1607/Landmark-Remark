@@ -13,7 +13,10 @@ class AddressNoteRepositoryImp @Inject constructor(private val addressNoteDao: A
     override fun getUserAddressHistory(userId: Int): LiveData<List<AddressNoteEntity>> =
         addressNoteDao.getUserAddressNoteHistory(userId)
 
-    override suspend fun deleteAddressNote(addressNote: AddressNoteEntity) =
+    override suspend fun updateAddressNote(addressNote: AddressNoteEntity): Int =
+        addressNoteDao.update(addressNote)
+
+    override suspend fun deleteAddressNote(addressNote: AddressNoteEntity): Int =
         addressNoteDao.delete(addressNote)
 
     override fun searchAddressNote(searchQuery: String): LiveData<List<AddressNoteEntity>> =

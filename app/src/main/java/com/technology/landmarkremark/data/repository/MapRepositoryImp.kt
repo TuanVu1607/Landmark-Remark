@@ -10,7 +10,7 @@ import com.technology.landmarkremark.data.dao.UserDao
 import com.technology.landmarkremark.data.entity.AddressNoteEntity
 import com.technology.landmarkremark.data.model.UserAddressNote
 import com.technology.landmarkremark.domain.repository.MapRepository
-import com.technology.landmarkremark.google_services.GoogleServicesApi
+import com.technology.landmarkremark.common.google_services.GoogleServicesApi
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,13 +23,8 @@ class MapRepositoryImp @Inject constructor(
 ) : MapRepository {
     override suspend fun getProfileUser(userId: Int) = userDao.getUserById(userId)
 
-    override fun getAddressNotes() = addressNoteDao.getAllData()
-
     override suspend fun addAddressNote(addressNote: AddressNoteEntity) =
         addressNoteDao.insert(addressNote)
-
-    override suspend fun updateAddressNote(addressNote: AddressNoteEntity) =
-        addressNoteDao.update(addressNote)
 
     override fun searchAddressNote(searchQuery: String): LiveData<List<UserAddressNote>> =
         userAddressNoteDao.searchUsersWithAddressNotes(searchQuery)

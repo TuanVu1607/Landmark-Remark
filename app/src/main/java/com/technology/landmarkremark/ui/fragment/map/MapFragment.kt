@@ -25,9 +25,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.technology.landmarkremark.R
+import com.technology.landmarkremark.common.constants.AppConstants
 import com.technology.landmarkremark.common.extensions.setOnSingleClickListener
 import com.technology.landmarkremark.common.extensions.toast
-import com.technology.landmarkremark.constants.GOOGLE_SERVICE_API_ERROR
 import com.technology.landmarkremark.data.model.AddressLocation
 import com.technology.landmarkremark.data.model.Resource
 import com.technology.landmarkremark.data.model.UserAddressNote
@@ -183,7 +183,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
                 is Resource.Error -> {
                     result.message?.let { errorMess ->
-                        Log.e(GOOGLE_SERVICE_API_ERROR, errorMess)
+                        Log.e(AppConstants.GOOGLE_SERVICE_API_ERROR, errorMess)
                         context?.toast(errorMess)
                     }
                 }

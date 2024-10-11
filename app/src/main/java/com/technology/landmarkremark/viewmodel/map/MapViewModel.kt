@@ -47,6 +47,8 @@ class MapViewModel @Inject constructor(private val mapRepository: MapRepository)
         Log.i(TAG, "initViewModel()")
     }
 
+    fun setTextSearch(text: String) = searchKey.postValue(text)
+
     fun reverseGeocodeMyLocation(location: Location) = viewModelScope.launch(Dispatchers.IO) {
         try {
             if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -163,6 +165,4 @@ class MapViewModel @Inject constructor(private val mapRepository: MapRepository)
             .icon(icon)
         map?.addMarker(marker)
     }
-
-    fun setTextSearch(text: String) = searchKey.postValue(text)
 }

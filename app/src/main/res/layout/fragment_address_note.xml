@@ -12,13 +12,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray_100">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/svSearchAddressNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_border_input"
+            android:background="@drawable/bg_no_border_input"
             app:iconifiedByDefault="false"
             app:layout_constraintBottom_toTopOf="@+id/rcvAddressNote"
             app:layout_constraintEnd_toEndOf="parent"

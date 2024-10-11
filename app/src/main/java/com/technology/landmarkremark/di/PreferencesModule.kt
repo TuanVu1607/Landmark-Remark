@@ -1,8 +1,8 @@
 package com.technology.landmarkremark.di
 
 import android.content.Context
-import com.technology.landmarkremark.preferences.PreferenceManager
-import com.technology.landmarkremark.preferences.Preferences
+import com.technology.landmarkremark.common.preferences.PreferenceManager
+import com.technology.landmarkremark.common.preferences.Preferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

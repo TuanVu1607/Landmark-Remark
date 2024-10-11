@@ -3,7 +3,7 @@ package com.technology.landmarkremark.ui.activity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import com.technology.landmarkremark.constants.DATABASE_ERROR
+import com.technology.landmarkremark.common.constants.AppConstants
 import com.technology.landmarkremark.data.model.Resource
 import com.technology.landmarkremark.databinding.ActivityLoginBinding
 import com.technology.landmarkremark.interfaces.RegisterDialogListener
@@ -37,7 +37,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
                 is Resource.Error -> {
                     loadingDialog?.cancelDialog(true)
-                    result.message?.let { errorMess ->Log.e(DATABASE_ERROR, errorMess) }
+                    result.message?.let { errorMess ->
+                        Log.e(
+                            AppConstants.DATABASE_ERROR,
+                            errorMess
+                        )
+                    }
                     RegisterDialog(this).createDialog(this)
                 }
 

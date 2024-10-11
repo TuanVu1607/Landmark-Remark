@@ -1,4 +1,4 @@
-package com.technology.landmarkremark.preferences
+package com.technology.landmarkremark.common.preferences
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

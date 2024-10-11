@@ -1,4 +1,4 @@
-package com.technology.landmarkremark.preferences
+package com.technology.landmarkremark.common.preferences
 
 object PreferencesConstants {
     const val KEYSTORE_NAME = "userCache"

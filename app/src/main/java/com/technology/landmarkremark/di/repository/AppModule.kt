@@ -13,8 +13,8 @@ import com.technology.landmarkremark.domain.repository.LoginRepository
 import com.technology.landmarkremark.domain.repository.MainRepository
 import com.technology.landmarkremark.domain.repository.MapRepository
 import com.technology.landmarkremark.domain.repository.SplashRepository
-import com.technology.landmarkremark.google_services.GoogleServicesApi
-import com.technology.landmarkremark.preferences.Preferences
+import com.technology.landmarkremark.common.google_services.GoogleServicesApi
+import com.technology.landmarkremark.common.preferences.Preferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

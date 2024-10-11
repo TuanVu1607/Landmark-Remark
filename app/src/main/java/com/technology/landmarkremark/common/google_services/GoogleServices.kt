@@ -1,4 +1,4 @@
-package com.technology.landmarkremark.google_services
+package com.technology.landmarkremark.common.google_services
 
 import android.content.Context
 import android.location.Geocoder

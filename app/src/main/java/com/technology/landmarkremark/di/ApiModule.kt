@@ -1,7 +1,7 @@
 package com.technology.landmarkremark.di
 
 import androidx.multidex.BuildConfig
-import com.technology.landmarkremark.constants.HOST_URL
+import com.technology.landmarkremark.common.constants.AppConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,7 +37,7 @@ object ApiModule {
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(HOST_URL)
+            .baseUrl(AppConstants.HOST_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

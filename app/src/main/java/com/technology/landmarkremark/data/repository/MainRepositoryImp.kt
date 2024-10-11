@@ -4,7 +4,7 @@ import com.technology.landmarkremark.data.dao.AddressNoteDao
 import com.technology.landmarkremark.data.entity.AddressNoteEntity
 import com.technology.landmarkremark.data.model.UserAddressNote
 import com.technology.landmarkremark.domain.repository.MainRepository
-import com.technology.landmarkremark.preferences.Preferences
+import com.technology.landmarkremark.common.preferences.Preferences
 import javax.inject.Inject
 import javax.inject.Singleton
 

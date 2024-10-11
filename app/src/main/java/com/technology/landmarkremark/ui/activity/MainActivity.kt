@@ -10,11 +10,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.technology.landmarkremark.R
+import com.technology.landmarkremark.common.enums.ActionDetailEnum
 import com.technology.landmarkremark.common.extensions.toast
 import com.technology.landmarkremark.data.model.Resource
 import com.technology.landmarkremark.data.model.UserAddressNote
 import com.technology.landmarkremark.databinding.ActivityMainBinding
-import com.technology.landmarkremark.interfaces.CreateNoteDialogListener
+import com.technology.landmarkremark.interfaces.ActionDetailNoteDialogListener
 import com.technology.landmarkremark.ui.base.BaseActivity
 import com.technology.landmarkremark.ui.dialog.ActionDetailNoteDialog
 import com.technology.landmarkremark.ui.dialog.ProgressDialog
@@ -23,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),
-    CreateNoteDialogListener {
+    ActionDetailNoteDialogListener {
     private val TAG = MainActivity::class.java.simpleName
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val navController by lazy { findNavController(R.id.nav_host_fragment_content_main) }
@@ -85,7 +86,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                             mainViewModel.currentLocation!!.address,
                             mainViewModel.currentLocation!!.lat,
                             mainViewModel.currentLocation!!.lng
-                        )
+                        ), ActionDetailEnum.CREATE
                     )
             }
 
@@ -104,5 +105,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun onCreateNote(userAddressNote: UserAddressNote) {
         mainViewModel.createNote(userAddressNote)
+    }
+
+    override fun onEditNote(userAddressNote: UserAddressNote) {
+        //
     }
 }

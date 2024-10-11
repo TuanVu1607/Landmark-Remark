@@ -20,4 +20,11 @@
     <string name="search_hint">Tìm kiếm…</string>
     <string name="get_location_fail">Lấy vị trí thất bại</string>
     <string name="please_allow_permission_location">Hãy cho phép truy cập vị trí</string>
+    <string name="close">Đóng</string>
+    <string name="edit_note">Chỉnh sửa ghi chú</string>
+    <string name="detail_note">Chi tiết ghi chú</string>
+    <string name="delete_note">Xóa ghi chú</string>
+    <string name="note_input_empty">Vui lòng nhập ghi chú</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="delete_confirm_message">Bạn có chắc chắn muốn xóa note này không?</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.technology.landmarkremark.preferences
+package com.technology.landmarkremark.common.preferences
 
 import com.technology.landmarkremark.data.entity.UserEntity
 

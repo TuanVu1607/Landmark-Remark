@@ -1,8 +1,8 @@
 package com.technology.landmarkremark.di
 
 import android.content.Context
-import com.technology.landmarkremark.google_services.GoogleServicesApi
-import com.technology.landmarkremark.google_services.GoogleServicesManager
+import com.technology.landmarkremark.common.google_services.GoogleServicesApi
+import com.technology.landmarkremark.common.google_services.GoogleServicesManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

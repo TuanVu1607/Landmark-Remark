@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.PorterDuff
 import android.graphics.RectF
 import android.view.MotionEvent
 import androidx.core.content.res.ResourcesCompat
@@ -13,15 +12,14 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.technology.landmarkremark.R
-import com.technology.landmarkremark.common.extensions.toast
 import com.technology.landmarkremark.utils.BitmapUtils
 import kotlin.math.max
+import kotlin.math.min
 
 abstract class SwipeGestureShowDeleteEdit(
     val context: Context,
     val listener: SwipeActionDeleteEditListener
-) :
-    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
     private var deleteButtonVisible = false
     private var editButtonVisible = false
@@ -37,6 +35,12 @@ abstract class SwipeGestureShowDeleteEdit(
         return false
     }
 
+    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+        super.clearView(recyclerView, viewHolder)
+        deleteButtonVisible = false
+        editButtonVisible = false
+    }
+
     override fun onChildDraw(
         canvas: Canvas,
         recyclerView: RecyclerView,
@@ -49,7 +53,8 @@ abstract class SwipeGestureShowDeleteEdit(
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {//vẽ nền và biểu tượng cho hành động vuốt
             //Tính toán width & height của item xuất hiện khi vuốt
             val itemView = viewHolder.itemView
-            val itemSwipeWidth = (itemView.right.toFloat() - itemView.left.toFloat()) / 5
+            val itemSwipeHeight = (itemView.bottom - itemView.top).toFloat()
+            val itemSwipeWidth = ((itemView.right - itemView.left) / 5).toFloat()
             /*
              * Swipe left: dX < 0
              * Swipe right: dX > 0
@@ -65,6 +70,7 @@ abstract class SwipeGestureShowDeleteEdit(
                 deleteButtonVisible = true
                 drawActionButton(
                     canvas,
+                    itemSwipeHeight,
                     itemSwipeWidth,
                     deleteButtonRectF,
                     context.getColor(R.color.red_500),
@@ -80,6 +86,7 @@ abstract class SwipeGestureShowDeleteEdit(
                     editButtonVisible = true
                     drawActionButton(
                         canvas,
+                        itemSwipeHeight,
                         itemSwipeWidth,
                         editButtonRectF,
                         context.getColor(R.color.blue_700),
@@ -110,6 +117,7 @@ abstract class SwipeGestureShowDeleteEdit(
 
     private fun drawActionButton(
         canvas: Canvas,
+        itemHeight: Float,
         itemWidth: Float,
         viewRectF: RectF,
         viewColor: Int,
@@ -123,14 +131,44 @@ abstract class SwipeGestureShowDeleteEdit(
         drawable?.let {
             it.setTint(Color.WHITE)
             val icon: Bitmap = BitmapUtils.drawableToBitmap(it)
+
+            val iconSize = context.resources.getDimension(R.dimen.base_icon_size)
             val iconDest = RectF(
-                viewRectF.left + itemWidth / 4,
-                viewRectF.top + itemWidth / 4,
-                viewRectF.right - itemWidth / 4,
-                viewRectF.bottom - itemWidth / 4
+                calculateLeftOffset(viewRectF, itemWidth, iconSize),
+                calculateTopOffset(viewRectF, itemHeight, iconSize),
+                calculateRightOffset(viewRectF, itemWidth, iconSize),
+                calculateBottomOffset(viewRectF, itemHeight, iconSize)
             )
             canvas.drawBitmap(icon, null, iconDest, pView)
         }
+    }
+
+    private fun calculateLeftOffset(viewRectF: RectF, itemWidth: Float, iconSize: Float): Float {
+        return max(
+            viewRectF.left + context.resources.getDimension(R.dimen.base_m_p_s),
+            viewRectF.right - (itemWidth / 2) - (iconSize / 2)
+        )
+    }
+
+    private fun calculateRightOffset(viewRectF: RectF, itemWidth: Float, iconSize: Float): Float {
+        return min(
+            viewRectF.right - context.resources.getDimension(R.dimen.base_m_p_s),
+            viewRectF.left + (itemWidth / 2) + (iconSize / 2)
+        )
+    }
+
+    private fun calculateTopOffset(viewRectF: RectF, itemHeight: Float, iconSize: Float): Float {
+        return max(
+            viewRectF.top + context.resources.getDimension(R.dimen.base_m_p_s),
+            viewRectF.bottom - (itemHeight / 2) - (iconSize / 2)
+        )
+    }
+
+    private fun calculateBottomOffset(viewRectF: RectF, itemHeight: Float, iconSize: Float): Float {
+        return min(
+            viewRectF.bottom - context.resources.getDimension(R.dimen.base_m_p_s),
+            viewRectF.top + (itemHeight / 2) + (iconSize / 2)
+        )
     }
 
     fun handleActionButtonClick(recyclerView: RecyclerView) {

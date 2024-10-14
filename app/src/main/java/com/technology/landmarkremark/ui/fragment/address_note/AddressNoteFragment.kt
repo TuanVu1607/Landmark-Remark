@@ -127,6 +127,7 @@ class AddressNoteFragment : BaseFragment<FragmentAddressNoteBinding, AddressNote
 
                 is Resource.Success -> {
                     loadingDialog?.cancelDialog()
+                    binding.rcvAddressNote.invalidateItemDecorations()
                     context?.toast("Chỉnh sửa note thành công")
                 }
             }
@@ -145,6 +146,7 @@ class AddressNoteFragment : BaseFragment<FragmentAddressNoteBinding, AddressNote
 
                 is Resource.Success -> {
                     loadingDialog?.cancelDialog()
+                    binding.rcvAddressNote.invalidateItemDecorations()
                     context?.toast("Xóa note thành công")
                 }
             }
